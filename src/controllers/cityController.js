@@ -1,11 +1,14 @@
 const cityService = require('../services/cityService');
 
-exports.getCity = async (req, res) => {
+const getCityName = async (req, res) => {
   try {
-    const city = await cityService.getCity();
-    res.json(city);
+    const cityName = await cityService.getCityName(req.body);
+    res.send(`Received city name: ${cityName}`);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(400).json({ error: error.message });
   }
+};
+
+module.exports = {
+  getCityName,
 };

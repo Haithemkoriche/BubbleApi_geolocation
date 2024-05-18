@@ -1,18 +1,17 @@
 const express = require('express');
-const app = express();
+const bodyParser = require('body-parser');
 const cityRoutes = require('./routes/cityRoutes');
 
-// Middleware
-app.use(express.json());
+const app = express();
+const port = 3000;
+
+// Middleware to parse JSON bodies
+app.use(bodyParser.json());
 
 // Routes
-app.use('/api/city', cityRoutes);
+app.use('/city', cityRoutes);
 
-// Start server
-const port = process.env.PORT || 3000;
+// Start the server
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
-
-
-
