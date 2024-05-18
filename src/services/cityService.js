@@ -1,8 +1,9 @@
-const { getCityName } = require('geocoding');
+const { placemarkFromCoordinates } = require('geocoding');
 
-const getCityNameFromCoordinates = async ({ latitude, longitude }) => {
+const getCityName = async ({ latitude, longitude }) => {
   try {
-    const placemarks = await getCityName(latitude, longitude);
+    // Reverse geocoding to get the city name
+    const placemarks = await placemarkFromCoordinates(latitude, longitude);
     return placemarks[0].locality || 'Unknown';
   } catch (error) {
     throw new Error('Error getting city name');
@@ -10,5 +11,5 @@ const getCityNameFromCoordinates = async ({ latitude, longitude }) => {
 };
 
 module.exports = {
-  getCityNameFromCoordinates,
+  getCityName,
 };
